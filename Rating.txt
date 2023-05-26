@@ -1,0 +1,10 @@
+Tom Custom_3x3_1 03 25
+Mat Custom_3x5_3 02 08
+Gena Custom_5x5_5 02 23
+Alex Easy_8x8_12 01 18
+Dima Hard_16x16_50 12 42
+Dimas Custom_13x13_10 10 35
+Alex_Fin Custom_4x4_2 00 15
+Egor_Nikolaev - Custom_4x4_2 00 10
+Egor_Nikolaev - Custom_4x4_2 00 12
+Egor_Nikolaev - Custom_4x4_2 00 07
