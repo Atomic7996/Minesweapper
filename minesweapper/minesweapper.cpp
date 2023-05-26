@@ -15,6 +15,171 @@
 
 using namespace std;
 
+void recordInResultsList(int minutes, int seconds, string selectedPreset)
+{
+	void callGameMenu();
+
+	string name;
+	system("cls");
+
+	cout << "Ваше время - " << minutes << " минут " << seconds << " секунд\n\n";
+	cout << "Введите своё имя: ";
+	cin >> name;
+
+	ofstream out;
+
+	out.open("G:/УП/minesweapper/Rating.txt", std::ios::binary | std::ios::app);
+	if (out.is_open())
+	{
+		out << "\n" << name << " - " << selectedPreset;
+		if (minutes < 10)
+			out << " 0" << minutes;
+		else
+			out << " " << minutes;
+		if (seconds < 10)
+			out << " 0" << seconds;
+		else
+			out << " " << seconds;
+	}
+	out.close();
+
+	cout << "\nВаши данные успешно записаны";
+	Sleep(500);
+	callGameMenu();
+}
+
+void printResultsList()
+{
+	system("cls");
+
+	ifstream in;
+	string word;
+	int counter = 1;
+
+	in.open("G:/УП/minesweapper/Rating.txt");
+
+	if (in.is_open())
+	{
+		cout << "Список победных результатов:\n" << endl;
+		for (int i = 0; i < 66; i++)
+		{
+			if (i == 0)
+				cout << "+";
+			else if (i == 26)
+				cout << "+";
+			else if (i == 44)
+				cout << "+";
+
+			else if (i == 65)
+				cout << "+";
+			else
+				cout << "-";
+		}
+
+		cout << "\n|";
+		cout << setw(14) << right << "Имя" << setw(12) << "|" << setw(11) << right << "Режим" << setw(7) << "|" << setw(13) << right << "Время" << setw(8) << "|" << endl;
+
+		for (int i = 0; i < 66; i++)
+		{
+			if (i == 0)
+				cout << "+";
+			else if (i == 26)
+				cout << "+";
+			else if (i == 44)
+				cout << "+";
+
+			else if (i == 65)
+				cout << "+";
+			else
+				cout << "-";
+		}
+		cout << "\n";
+
+		while (in >> word)
+		{
+			if (counter % 10 == 1)
+			{
+				cout << "| " << setw(24) << left << word << "| ";
+			}
+			if (counter % 10 == 2)
+			{
+				cout << setw(16) << word << "| ";
+			}
+
+			if (counter % 10 == 3)
+			{
+				cout << word << " минут ";
+			}
+
+			if (counter % 10 == 4)
+			{
+				cout << word;
+				cout << " секунд |\n";
+				counter = 0;
+			}
+
+			counter++;
+		}
+
+		for (int i = 0; i < 66; i++)
+		{
+			if (i == 0)
+				cout << "+";
+			else if (i == 26)
+				cout << "+";
+			else if (i == 44)
+				cout << "+";
+
+			else if (i == 65)
+				cout << "+";
+			else
+				cout << "-";
+		}
+		cout << "\n";
+	}
+}
+
+void callGameMenu()
+{
+	void selectPreset();
+
+	int option;
+	int toMainMenu;
+
+	do {
+		system("cls");
+		cout << "Добро пожаловать в игру САПЁР!\n";
+		cout << "\nУправление в меню осуществляется с помощью ввода номеров команд,\nпредставленных на экране.\n\n";
+
+		cout << "1. Начать игру\n";
+		cout << "2. Правила игры\n";
+		cout << "3. Список результатов\n";
+		cout << "0. Выход из игры\n> ";
+		cin >> option;
+
+		switch (option)
+		{
+		case 1: {
+			selectPreset();
+			continue;
+		}
+		
+		case 3: {
+			printResultsList();
+
+			cout << "\nВведите 0, чтобы вернуться в главное меню\n>";
+			cin >> toMainMenu;
+
+			if (toMainMenu == 0)
+				continue;
+		}
+		default:
+			continue;
+		}
+
+	} while (option != 0);
+}
+
 char** generateField(char** field, int fieldHeight, int fieldWidth, int mines)
 {
 	int usedSpace = 0;
@@ -520,6 +685,16 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 			cout << "\n0. Выход в главное меню\n>";
 			cin >> option;
 
+			switch (option)
+			{
+			case 1:
+				recordInResultsList(minutes, seconds, selectedPreset);
+				break;
+
+			case 0:
+				callGameMenu();
+				break;
+			}
 		}
 
 		SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
@@ -625,7 +800,11 @@ void selectPreset()
 		selectedPreset += to_string(fieldWidth) + "x" + to_string(fieldHeight) + "_" + to_string(mines);
 		break;
 	}
-	
+	case 0: {
+		callGameMenu();
+	}
+	default:
+		callGameMenu();
 	}
 
 	if (fieldWasGenerated = true)
@@ -639,32 +818,7 @@ int main()
 	setlocale(LC_ALL, "rus");
 	srand(time(NULL));
 
-	int option;
-	int toMainMenu;
-
-	do {
-		system("cls");
-		cout << "Добро пожаловать в игру САПЁР!\n";
-		cout << "\nУправление в меню осуществляется с помощью ввода номеров команд,\nпредставленных на экране.\n\n";
-
-		cout << "1. Начать игру\n";
-		cout << "2. Правила игры\n";
-		cout << "3. Список результатов\n";
-		cout << "0. Выход из игры\n> ";
-		cin >> option;
-
-		switch (option)
-		{
-		case 1: {
-			selectPreset();
-			continue;
-		}
-		
-		default:
-			continue;
-		}
-
-	} while (option != 0);
+	callGameMenu();
 
 	return 0;
 }
