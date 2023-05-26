@@ -515,7 +515,11 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 			else
 				cout << " " << seconds << " секунд\n";
 
-			
+			cout << "\nЖелаете сохранить свой результат?\n";
+			cout << "\n1. Сохранить";
+			cout << "\n0. Выход в главное меню\n>";
+			cin >> option;
+
 		}
 
 		SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
@@ -529,6 +533,107 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 	system("cls");
 }
 
+void selectPreset()
+{
+	int option, fieldHeight, fieldWidth, mines, minesCheck;
+	char** field = new char*;
+	boolean fieldWasGenerated = false;
+	string selectedPreset;
+
+	system("cls");
+	cout << "Выберите режим игры:\n\n";
+	cout << "1. Легкий - поле 8x8, 12 мин\n";
+	cout << "2. Средний - поле 11x11, 24 мины\n";
+	cout << "3. Сложный - поле 16x16, 50 мин\n";
+	cout << "4. Настраиваемый\n";
+	cout << "0. Вернуться в главное меню\n> ";
+	cin >> option;
+
+	switch (option)
+	{
+	case 1: {
+		fieldHeight = fieldWidth = 8;
+		mines = 12;
+		field = generateField(field, fieldHeight, fieldWidth, mines);
+		fieldWasGenerated = true;
+		selectedPreset = "Easy_8x8_12";
+		break;
+	}
+	case 2: {
+		fieldHeight = fieldWidth = 11;
+		mines = 24;
+		field = generateField(field, fieldHeight, fieldWidth, mines);
+		fieldWasGenerated = true;
+		selectedPreset = "Normal_11x11_24";
+		break;
+	}
+	case 3: {
+		fieldHeight = fieldWidth = 16;
+		mines = 50;
+		field = generateField(field, fieldHeight, fieldWidth, mines);
+		fieldWasGenerated = true;
+		selectedPreset = "Hard_16x16_50";
+		break;
+	}
+	case 4: {
+		system("cls");
+		cout << "Настройка режима:\n\n";
+		cout << "Введите высоту поля (max 30, min 3): ";
+		cin >> fieldHeight;
+
+		if (fieldHeight > 30)
+		{
+			cout << "Будет применена высота поля 30\n";
+			fieldHeight = 30;
+		}
+
+		if (fieldHeight < 3)
+		{
+			cout << "Будет применена высота поля 3\n";
+			fieldHeight = 3;
+		}
+
+		cout << "\nВведите ширину поля (max 30, min 3): ";
+		cin >> fieldWidth;
+
+		if (fieldWidth > 30)
+		{
+			cout << "Будет применена ширина поля 30\n";
+			fieldWidth = 30;
+		}
+
+		if (fieldWidth < 3)
+		{
+			cout << "Будет применена ширина поля 3\n";
+			fieldWidth = 3;
+		}
+
+		minesCheck = fieldHeight * fieldWidth / 5;
+
+		cout << "\nВведите количество мин (max " << minesCheck << "): ";
+		cin >> mines;
+
+		if (mines > minesCheck)
+		{
+			cout << "Будет применено количество мин " << minesCheck << endl;
+			mines = minesCheck;
+		}
+
+		field = generateField(field, fieldHeight, fieldWidth, mines);
+		fieldWasGenerated = true;
+		selectedPreset = "Custom_";
+		selectedPreset += to_string(fieldWidth) + "x" + to_string(fieldHeight) + "_" + to_string(mines);
+		break;
+	}
+	
+	}
+
+	if (fieldWasGenerated = true)
+		gameplay(field, fieldHeight, fieldWidth, mines, selectedPreset);
+	else
+		selectPreset();
+}
+
 int main()
 {
 	setlocale(LC_ALL, "rus");
@@ -536,10 +641,6 @@ int main()
 
 	int option;
 	int toMainMenu;
-	int fieldHeight, fieldWidth, mines, minesCheck;
-	char** field = new char*;
-	boolean fieldWasGenerated = false;
-	string selectedPreset;
 
 	do {
 		system("cls");
@@ -555,15 +656,7 @@ int main()
 		switch (option)
 		{
 		case 1: {
-			fieldHeight = fieldWidth = 8;
-			mines = 12;
-			field = generateField(field, fieldHeight, fieldWidth, mines);
-			fieldWasGenerated = true;
-			selectedPreset = "Easy_8x8_12";
-
-			if (fieldWasGenerated = true)
-				gameplay(field, fieldHeight, fieldWidth, mines, selectedPreset);
-
+			selectPreset();
 			continue;
 		}
 		
