@@ -274,6 +274,7 @@ void callGameMenu()
 		}
 		}
 	} while (option != '0');
+	system("pause");
 }
 
 char** generateField(char** field, int fieldHeight, int fieldWidth, int mines)
@@ -612,7 +613,7 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 			for (int i = 0; i < 29 / 2 - 11; i++)
 				cout << " ";
 		}
-		for (int i = 0; i < fieldWidth - 8; i++)
+		for (int i = 0; i < fieldWidth - 9; i++)
 			cout << " ";
 		cout << " Осталось ";
 		for (int i = cleanSpace; i != 0; i--)
@@ -621,11 +622,9 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 		buffer.dwCursorPosition.X -= cleanSpace;
 		SetConsoleCursorPosition(hOut, buffer.dwCursorPosition);
 		cout << mines;
-		if (mines < 0)
-			cout << "";
-		if (mines / 10 == 0)
+		if (mines < 10)
 			cout << "  ";
-		if (mines / 100 < 1)
+		if (mines / 10 >= 1)
 			cout << " ";
 		cout << " мин";
 		if (fieldWidth * 2 + 7 < 29)
@@ -1049,5 +1048,6 @@ int main()
 	srand(time(NULL));
 
 	callGameMenu();
+
 	return 0;
 }
