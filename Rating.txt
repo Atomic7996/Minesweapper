@@ -10,3 +10,5 @@ Anton Easy_8x8_12 02 45
 Fedya Custom_30x30_120 57 29
 Alex_Bel Custom_5x5_3 00 23
 Aleksey_Ivanov Easy_8x8_12 01 18
+lk Custom_5x5_1 00 02
+00 Custom_5x5_1 00 03

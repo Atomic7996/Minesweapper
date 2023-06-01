@@ -39,7 +39,7 @@ void recordInResultsList(int minutes, int seconds, string selectedPreset)
 	cout << "### Введите ваше имя: ";
 	cin >> name;
 
-	out.open("G:/УП/minesweapper/Rating.txt", std::ios::binary | std::ios::app);
+	out.open("C:/Users/sasha/source/repos/Atomic7996/Minesweapper/Rating.txt", std::ios::binary | std::ios::app);
 	if (out.is_open())
 	{
 		out << "\n" << name << " " << selectedPreset;
@@ -80,7 +80,7 @@ void printResultsList()
 	cout << "###                         Список  результатов                         ###" << endl;
 	cout << "###########################################################################" << endl;
 
-	in.open("G:/УП/minesweapper/Rating.txt");
+	in.open("C:/Users/sasha/source/repos/Atomic7996/Minesweapper/Rating.txt");
 	if (in.is_open())
 	{
 		for (int i = 0; i < 75; i++)
@@ -251,6 +251,7 @@ void callGameMenu()
 
 			if (toMainMenu == '0')
 				break;
+			break;
 		}
 		case '3': {
 			printResultsList();
@@ -261,6 +262,7 @@ void callGameMenu()
 
 			if (toMainMenu == '0')
 				break;
+			break;
 		}
 		case '0': {
 			cout << "#################################################" << endl;
@@ -274,7 +276,8 @@ void callGameMenu()
 		}
 		}
 	} while (option != '0');
-	system("pause");
+
+	
 }
 
 char** generateField(char** field, int fieldHeight, int fieldWidth, int mines)
@@ -891,7 +894,9 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 					callGameMenu();
 					break;
 				}
+				break;
 			} while (option != '0');
+			
 		}
 		// при поражении
 		else
@@ -1039,6 +1044,7 @@ void selectPreset()
 			gameplay(field, fieldHeight, fieldWidth, mines, selectedPreset);
 			break;
 		}
+		break;
 	} while (option != '0');
 }
 
@@ -1048,6 +1054,5 @@ int main()
 	srand(time(NULL));
 
 	callGameMenu();
-
 	return 0;
 }
