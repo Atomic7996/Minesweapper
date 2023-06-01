@@ -20,18 +20,29 @@ void recordInResultsList(int minutes, int seconds, string selectedPreset)
 	void callGameMenu();
 
 	string name;
-	system("cls");
-
-	cout << "Ваше время - " << minutes << " минут " << seconds << " секунд\n\n";
-	cout << "Введите своё имя: ";
-	cin >> name;
-
 	ofstream out;
+
+	system("cls");
+	cout << "#######################################" << endl;
+	cout << "###        Запись результата        ###" << endl;
+	cout << "#######################################" << endl;
+
+	if (minutes < 10)
+		cout << "### Ваше время - 0" << minutes << " минут ";
+	else
+		cout << "### Ваше время - " << minutes << " минут ";
+	if (seconds < 10)
+		cout << "0" << seconds << " секунд ###" << endl;
+	else
+		cout << seconds << " секунд ###" << endl;
+
+	cout << "### Введите ваше имя: ";
+	cin >> name;
 
 	out.open("G:/УП/minesweapper/Rating.txt", std::ios::binary | std::ios::app);
 	if (out.is_open())
 	{
-		out << "\n" << name << " - " << selectedPreset;
+		out << "\n" << name << " " << selectedPreset;
 		if (minutes < 10)
 			out << " 0" << minutes;
 		else
@@ -41,171 +52,228 @@ void recordInResultsList(int minutes, int seconds, string selectedPreset)
 		else
 			out << " " << seconds;
 	}
+	else
+	{
+		cout << "#######################################" << endl;
+		cout << "###   Файл для записи отсутствует   ###" << endl;
+		cout << "#######################################" << endl;
+
+	}
 	out.close();
 
-	cout << "\nВаши данные успешно записаны";
+	cout << "#######################################" << endl;
+	cout << "###  Ваши данные  успешно записаны  ###" << endl;
+	cout << "#######################################" << endl;
 	Sleep(500);
+
 	callGameMenu();
 }
 
 void printResultsList()
 {
-	system("cls");
-
 	ifstream in;
 	string word;
 	int counter = 1;
 
-	in.open("G:/УП/minesweapper/Rating.txt");
+	system("cls");
+	cout << "###########################################################################" << endl;
+	cout << "###                         Список  результатов                         ###" << endl;
+	cout << "###########################################################################" << endl;
 
+	in.open("G:/УП/minesweapper/Rating.txt");
 	if (in.is_open())
 	{
-		cout << "Список победных результатов:\n" << endl;
-		for (int i = 0; i < 66; i++)
+		for (int i = 0; i < 75; i++)
 		{
-			if (i == 0)
+			if (i >= 0 && i <= 2)
+				cout << "#";
+			else if (i == 3)
+				cout << " ";
+			else if (i == 4)
 				cout << "+";
-			else if (i == 26)
+			else if (i == 30)
 				cout << "+";
-			else if (i == 44)
+			else if (i == 49)
 				cout << "+";
-
-			else if (i == 65)
+			else if (i == 70)
 				cout << "+";
+			else if (i == 71)
+				cout << " ";
+			else if (i >= 72 && i <= 74)
+				cout << "#";
 			else
 				cout << "-";
 		}
 
-		cout << "\n|";
-		cout << setw(14) << right << "Имя" << setw(12) << "|" << setw(11) << right << "Режим" << setw(7) << "|" << setw(13) << right << "Время" << setw(8) << "|" << endl;
+		cout << endl << "### |";
+		cout << setw(14) << right << "Имя" << setw(12) << "|" << setw(11) << right << "Режим" << setw(8) << "|" << setw(13) << right << "Время" << setw(12) << "| ###" << endl;
 
-		for (int i = 0; i < 66; i++)
+		for (int i = 0; i < 75; i++)
 		{
-			if (i == 0)
+			if (i >= 0 && i <= 2)
+				cout << "#";
+			else if (i == 3)
+				cout << " ";
+			else if (i == 4)
 				cout << "+";
-			else if (i == 26)
+			else if (i == 30)
 				cout << "+";
-			else if (i == 44)
+			else if (i == 49)
 				cout << "+";
-
-			else if (i == 65)
+			else if (i == 70)
 				cout << "+";
+			else if (i == 71)
+				cout << " ";
+			else if (i >= 72 && i <= 74)
+				cout << "#";
 			else
 				cout << "-";
 		}
-		cout << "\n";
+		cout << endl;
 
 		while (in >> word)
 		{
 			if (counter % 10 == 1)
-			{
-				cout << "| " << setw(24) << left << word << "| ";
-			}
-			if (counter % 10 == 2)
-			{
-				cout << setw(16) << word << "| ";
-			}
-
-			if (counter % 10 == 3)
-			{
+				cout << "### | " << setw(24) << left << word << "| ";
+			else if (counter % 10 == 2)
+				cout << setw(17) << word << "| ";
+			else if (counter % 10 == 3)
 				cout << word << " минут ";
-			}
-
-			if (counter % 10 == 4)
+			else if (counter % 10 == 4)
 			{
 				cout << word;
-				cout << " секунд |\n";
+				cout << " секунд | ###" << endl;
 				counter = 0;
 			}
 
 			counter++;
 		}
 
-		for (int i = 0; i < 66; i++)
+		for (int i = 0; i < 75; i++)
 		{
-			if (i == 0)
+			if (i >= 0 && i <= 2)
+				cout << "#";
+			else if (i == 3)
+				cout << " ";
+			else if (i == 4)
 				cout << "+";
-			else if (i == 26)
+			else if (i == 30)
 				cout << "+";
-			else if (i == 44)
+			else if (i == 49)
 				cout << "+";
-
-			else if (i == 65)
+			else if (i == 70)
 				cout << "+";
+			else if (i == 71)
+				cout << " ";
+			else if (i >= 72 && i <= 74)
+				cout << "#";
 			else
 				cout << "-";
 		}
-		cout << "\n";
+
+		cout << endl << "###########################################################################" << endl;
+
 	}
+	else
+	{
+		cout << "###                         Записи  отсутствуют                         ###" << endl;
+		cout << "###########################################################################" << endl;
+	}
+
+	in.close();
 }
 
 void printRules()
 {
 	system("cls");
-
-	cout << "Описание игры:\n" << endl;
-	cout << "Целью игры является открытие всех ячеек, не содержащих мины." << endl;
-	cout << "После выбора режима игры, на поле рандомно расставляются мины, на которые игрок не должен попаться.\n" << endl;
-	cout << "Для начала игры необходимо наугад открыть первую ячейку." << endl;
-	cout << "Если рядом с этой ячейкой располагаются несколько свободных ячеек, то они все откроются." << endl;
-	cout << "Числовые значения в ячейках указывают на количество мин в соседних." << endl;
-	cout << "С помощью этих подсказок можно определить, где расположены мины :" << endl;
-	cout << "число 1 указывает, что из ячеек сверху, слева, снизу, справа и по диагонали от открытой лишь одна содержит мину;" << endl;
-	cout << "вокруг ячеек с числом 2 находится по 2 мины и так далее вплоть до 8." << endl;
-	cout << "Если игрок попадется на ячейку с миной, то игра завершается.\n" << endl;
-	cout << "Для удобства игры, ячейки с минами можно отмечать щелчком правой кнопки мыши, на данной ячейке появится указатель." << endl;
-	cout << "Если отметка была ошибочной, указатель можно снять повторным нажатием.\n" << endl;
-	cout << "Для победы необхожимо открыть все ячейки без мин." << endl;
-	cout << "Приятной игры и удали на поле!" << endl;
+	cout << "########################################################################" << endl;
+	cout << "###                          Описание  игры                          ###" << endl;
+	cout << "########################################################################" << endl;
+	cout << "### Целью игры является открытие всех ячеек, не содержащих мины.     ###" << endl;
+	cout << "### После выбора режима игры, на поле рандомно расставляются мины,   ###" << endl;
+	cout << "### на которые игрок не должен попасться.                            ###" << endl;
+	cout << "### Для начала игры необходимо наугад открыть первую ячейку.         ###" << endl;
+	cout << "### Если рядом с этой ячейкой располагаются несколько свободных      ###" << endl;
+	cout << "### ячеек, то они все откроются.                                     ###" << endl;
+	cout << "### Числовые значения в ячейках указывают на количество мин в        ###" << endl;
+	cout << "### соседних.                                                        ###" << endl;
+	cout << "### С помощью этих подсказок можно определить, где расположены мины: ###" << endl;
+	cout << "### число 1 указывает, что из ячеек сверху, слева, снизу, справа и   ###" << endl;
+	cout << "### по диагонали от открытой лишь одна содержит мину;                ###" << endl;
+	cout << "### вокруг ячеек с числом 2 находится по 2 мины и так далее до 8.    ###" << endl;
+	cout << "### Если игрок попадется на ячейку с миной, то игра завершается.     ###" << endl;
+	cout << "### Для удобства игры ячейки с минами можно отмечать щелчком правой  ###" << endl;
+	cout << "### кнопки мыши - на данной ячейке появится указатель. Если отметка  ###" << endl;
+	cout << "### была ошибочной, то указатель можно снять повторным щелчком.      ###" << endl;
+	cout << "### Для победы необходимо открыть все ячейки без мин.                ###" << endl;
+	cout << "########################################################################" << endl;
+	cout << "###                  Приятной игры и удачи на поле!                  ###" << endl;
+	cout << "########################################################################" << endl;
 }
 
 void callGameMenu()
 {
 	void selectPreset();
 
-	int option;
-	int toMainMenu;
+	char option;
+	char toMainMenu;
 
 	do {
 		system("cls");
-		cout << "Добро пожаловать в игру САПЁР!\n";
-		cout << "\nУправление в меню осуществляется с помощью ввода номеров команд,\nпредставленных на экране.\n\n";
-
-		cout << "1. Начать игру\n";
-		cout << "2. Правила игры\n";
-		cout << "3. Список результатов\n";
-		cout << "0. Выход из игры\n> ";
+		cout << "#################################################" << endl;
+		cout << "###       Добро пожаловать в игру САПЁР       ###" << endl;
+		cout << "#################################################" << endl;
+		cout << "###     Управление в  меню осуществляется     ###" << endl;
+		cout << "###     с помощью ввода  номеров  команд,     ###" << endl;
+		cout << "###     представленных     на     экране.     ###" << endl;
+		cout << "#################################################" << endl;
+		cout << "###     1 - Начать игру                       ###" << endl;
+		cout << "###     2 - Правила игры                      ###" << endl;
+		cout << "###     3 - Список победных результатов       ###" << endl;
+		cout << "###     0 - Выход из игры                     ###" << endl;
+		cout << "#################################################" << endl;
+		cout << "> ";
 		cin >> option;
 
 		switch (option)
 		{
-		case 1: {
+		case '1': {
 			selectPreset();
-			continue;
+			break;
 		}
-		case 2: {
+		case '2': {
 			printRules();
 
-			cout << "\nВведите 0, чтобы вернуться в главное меню\n>";
+			cout << "###            Введите 0,  чтобы вернуться в главное меню            ###" << endl;
+			cout << "########################################################################" << endl;
+			cout << "> ";
 			cin >> toMainMenu;
 
-			if (toMainMenu == 0)
-				continue;
+			if (toMainMenu == '0')
+				break;
 		}
-		case 3: {
+		case '3': {
 			printResultsList();
-
-			cout << "\nВведите 0, чтобы вернуться в главное меню\n>";
+			cout << "###              Введите 0, чтобы вернуться в главное меню              ###" << endl;
+			cout << "###########################################################################" << endl;
+			cout << "> ";
 			cin >> toMainMenu;
 
-			if (toMainMenu == 0)
-				continue;
+			if (toMainMenu == '0')
+				break;
 		}
-		default:
-			continue;
+		case '0': {
+			cout << "#################################################" << endl;
+			cout << "###             Вы покинули  игру             ###" << endl;
+			cout << "#################################################" << endl;
+			break;
 		}
-
-	} while (option != 0);
+		default: {
+			callGameMenu();
+			break;
+		}
+		}
+	} while (option != '0');
 }
 
 char** generateField(char** field, int fieldHeight, int fieldWidth, int mines)
@@ -255,33 +323,28 @@ char** generateField(char** field, int fieldHeight, int fieldWidth, int mines)
 			{
 				if (i - 1 >= 0 && field[i - 1][j] != mine)
 					field[i - 1][j]++;
-
 				if (i + 1 < fieldHeight && field[i + 1][j] != mine)
 					field[i + 1][j]++;
-
 				if (j - 1 >= 0 && field[i][j - 1] != mine)
 					field[i][j - 1]++;
-
 				if (j + 1 < fieldWidth && field[i][j + 1] != mine)
 					field[i][j + 1]++;
-
 				if (i - 1 >= 0 && j - 1 >= 0 && field[i - 1][j - 1] != mine)
 					field[i - 1][j - 1]++;
-
 				if (i - 1 >= 0 && j + 1 < fieldWidth && field[i - 1][j + 1] != mine)
 					field[i - 1][j + 1]++;
-
 				if (i + 1 < fieldHeight && j - 1 >= 0 && field[i + 1][j - 1] != mine)
 					field[i + 1][j - 1]++;
-
 				if (i + 1 < fieldHeight && j + 1 < fieldWidth && field[i + 1][j + 1] != mine)
 					field[i + 1][j + 1]++;
 			}
 		}
 	}
 
-	cout << endl;
-	cout << "Игровое поле успешно сгенерировано\n\n";
+	cout << "#################################################" << endl;
+	cout << "###    Игровое поле  успешно сгенерировано    ###" << endl;
+	cout << "#################################################" << endl;
+
 	Sleep(1000);
 
 	return field;
@@ -305,85 +368,77 @@ int checkNearCell(char** field, char** playerView, int check, int i, int j)
 
 void openSpace(char** field, char** playerView, int fieldHeight, int fieldWidth, int x, int y)
 {
-	int check = 0;
-	int xDiv2 = x / 2;
+	int checkedCells = 0;
+	int xDiv2 = x / 2 - 2;
 	//Берутся только нечетные координаты, так как после каждой ячейки идет пробел
 	if (!(x % 2))
 	{
-		if (y < fieldHeight && xDiv2 < fieldWidth)
+		if (y - 1 < fieldHeight && xDiv2 < fieldWidth)
 		{
-			if (playerView[y][xDiv2] == closedCell && field[y][xDiv2] != 0)
-				playerView[y][xDiv2] = openedCell;
+			if (playerView[y - 1][xDiv2] == closedCell && field[y - 1][xDiv2] != 0)
+				playerView[y - 1][xDiv2] = openedCell;
 
-			if (playerView[y][xDiv2] == closedCell && field[y][xDiv2] == freeCell)
+			if (playerView[y - 1][xDiv2] == closedCell && field[y - 1][xDiv2] == freeCell)
 			{
-				playerView[y][xDiv2] = uncheckedCell;
-				check++;
-
-				for (int i = 0; i < fieldHeight; i++)
+				playerView[y - 1][xDiv2] = uncheckedCell;
+				checkedCells++;
+				// i = 1 и j = 4, из-за рамки в консоли
+				for (int i = 1; i < fieldHeight + 1; i++)
 				{
-					for (int j = 0; j < fieldWidth; j++)
+					for (int j = 4; j < fieldWidth + 4; j++)
 					{
-						if (playerView[i][j] == uncheckedCell)
+						if (playerView[i - 1][j - 4] == uncheckedCell)
 						{
-							playerView[i][j] = openedCell;
-							check--;
+							playerView[i - 1][j - 4] = openedCell;
+							checkedCells--;
 							//Проверка ячеек вокруг выбранной
-							if (i - 1 >= 0)
-								check = checkNearCell(field, playerView, check, i - 1, j);
+							if (i - 1 - 1 >= 0)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1 - 1, j - 4);
+							if (i - 1 - 1 >= 0 && j - 4 - 1 >= 0)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1 - 1, j - 4 - 1);
+							if (j - 4 - 1 >= 0)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1, j - 4 - 1);
+							if (i - 1 + 1 < fieldHeight && j - 4 - 1 >= 0)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1 + 1, j - 4 - 1);
+							if (i - 1 + 1 < fieldHeight)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1 + 1, j - 4);
+							if (i - 1 + 1 < fieldHeight && j - 4 + 1 < fieldWidth)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1 + 1, j - 4 + 1);
+							if (j - 4 + 1 < fieldWidth)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1, j - 4 + 1);
+							if (i - 1 - 1 >= 0 && j - 4 + 1 < fieldWidth)
+								checkedCells = checkNearCell(field, playerView, checkedCells, i - 1 - 1, j - 4 + 1);
+							if (checkedCells > 0)
+								i = 1;
 
-							if (i - 1 >= 0 && j - 1 >= 0)
-								check = checkNearCell(field, playerView, check, i - 1, j - 1);
-
-							if (j - 1 >= 0)
-								check = checkNearCell(field, playerView, check, i, j - 1);
-
-							if (i + 1 < fieldHeight && j - 1 >= 0)
-								check = checkNearCell(field, playerView, check, i + 1, j - 1);
-
-							if (i + 1 < fieldHeight)
-								check = checkNearCell(field, playerView, check, i + 1, j);
-
-							if (i + 1 < fieldHeight && j + 1 < fieldWidth)
-								check = checkNearCell(field, playerView, check, i + 1, j + 1);
-
-							if (j + 1 < fieldWidth)
-								check = checkNearCell(field, playerView, check, i, j + 1);
-
-							if (i - 1 >= 0 && j + 1 < fieldWidth)
-								check = checkNearCell(field, playerView, check, i - 1, j + 1);
-
-							if (check > 0)
-								i = 0;
-
-							j = -1;
+							j = 3;
 						}
 					}
 				}
 			}
 
-			if (field[y][xDiv2] == mine && playerView[y][xDiv2] != flagMine)
-				playerView[y][xDiv2] = explodedMine;
+			if (field[y - 1][xDiv2] == mine && playerView[y - 1][xDiv2] != flagMine)
+				playerView[y - 1][xDiv2] = explodedMine;
 		}
 	}
 }
 
 void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string selectedPreset)
 {
-	HANDLE hIn, hOut;
+	HANDLE hIn;
+	HANDLE hOut;
 	INPUT_RECORD inRec;
 	DWORD numRead;
 	CONSOLE_CURSOR_INFO curs;
 	CONSOLE_SCREEN_BUFFER_INFO buffer;
 	COORD zero = { 0,0 };
-	boolean gameOver = false;
-	boolean win = false;
+	boolean isGameOver = false;
+	boolean isWin = false;
 	int x;
 	int y;
 	int xDiv2;
 	int flag = 0;
 	int cleanSpace = 2;
-	int input = 1;
 	int markedMines = 0;
 	int openedCells = 0;
 	int minesAtBeginning = mines;
@@ -398,7 +453,7 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 		for (int j = 0; j < fieldWidth; j++)
 			playerView[i][j] = closedCell;
 	}
-	//Определение длины кол-ва мин для вывода в консоль
+	//Определение длины количествава мин для вывода в консоль
 	for (int i = mines; (i /= 10) > 0;)
 		cleanSpace++;
 
@@ -407,15 +462,28 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	GetConsoleCursorInfo(hOut, &curs);
 	SetConsoleMode(hIn, ENABLE_MOUSE_INPUT | ENABLE_EXTENDED_FLAGS);
-
-	while (!gameOver)
+	// пока игра не кончилась
+	while (!isGameOver)
 	{
 		curs.bVisible = false;
 		SetConsoleCursorInfo(hOut, &curs);
 		SetConsoleCursorPosition(hOut, zero);
+		// вывод игрового поля
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29; i++)
+				cout << "#";
+		}
+		else
+		{
+			for (int i = 0; i < fieldWidth * 2 + 7; i++)
+				cout << "#";
+		}
+		cout << endl;
 
 		for (int i = 0; i < fieldHeight; i++)
 		{
+			cout << "### ";
 			for (int j = 0; j < fieldWidth; j++)
 			{
 				switch (playerView[i][j])
@@ -430,7 +498,7 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 					SetConsoleTextAttribute(hOut, (WORD)(0 | 4));
 					WriteConsoleW(hOut, L"☼ ", wcslen(L"☼ "), NULL, NULL);
 					SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
-					gameOver = true;
+					isGameOver = true;
 					break;
 				}
 				case openedCell: {
@@ -511,88 +579,158 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 				}
 				}
 			}
+
+			if (fieldWidth * 2 + 7 < 29)
+			{
+				for (int i = 0; i < 29 / 2 - fieldWidth * 2 + 8; i++)
+					cout << " ";
+			}
+			cout << "###";
 			cout << endl;
 		}
-
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29; i++)
+				cout << "#";
+		}
+		else
+		{
+			for (int i = 0; i < fieldWidth * 2 + 7; i++)
+				cout << "#";
+		}
+		cout << endl;
+		// проверка условий для победы
 		if (markedMines == minesAtBeginning || openedCells >= (fieldHeight * fieldWidth - minesAtBeginning))
-			win = gameOver = true;
+			isWin = isGameOver = true;
 
 		openedCells = 0;
 		markedMines = 0;
-
-		cout << "\nMines left ";
-
+		// вывод рамки снизу
+		cout << "###";
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29 / 2 - 11; i++)
+				cout << " ";
+		}
+		for (int i = 0; i < fieldWidth - 8; i++)
+			cout << " ";
+		cout << " Осталось ";
 		for (int i = cleanSpace; i != 0; i--)
-			cout << ' ';
-
+			cout << " ";
 		GetConsoleScreenBufferInfo(hOut, &buffer);
 		buffer.dwCursorPosition.X -= cleanSpace;
 		SetConsoleCursorPosition(hOut, buffer.dwCursorPosition);
 		cout << mines;
-
-		cout << "\nНажмите 0 для выхода" << endl;
+		if (mines < 0)
+			cout << "";
+		if (mines / 10 == 0)
+			cout << "  ";
+		if (mines / 100 < 1)
+			cout << " ";
+		cout << " мин";
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29 / 2 - 11; i++)
+				cout << " ";
+		}
+		for (int i = 0; i < fieldWidth - 8; i++)
+			cout << " ";
+		cout << "###" << endl;
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29; i++)
+				cout << "#";
+		}
+		else
+		{
+			for (int i = 0; i < fieldWidth * 2 + 7; i++)
+				cout << "#";
+		}
+		cout << endl;
+		cout << "### ";
+		for (int i = 0; i < fieldWidth - 11; i++)
+			cout << " ";
+		cout << "Нажмите 0  для выхода";
+		for (int i = 0; i < fieldWidth - 11; i++)
+			cout << " ";
+		cout << " ###" << endl;
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29; i++)
+				cout << "#";
+		}
+		else
+		{
+			for (int i = 0; i < fieldWidth * 2 + 7; i++)
+				cout << "#";
+		}
+		cout << endl;
 		curs.bVisible = true;
 		SetConsoleCursorInfo(hOut, &curs);
 		ReadConsoleInput(hIn, &inRec, 1, &numRead);
 
-		//Нажатие мыши
+		// обработка нажатия кнопок мыши
 		switch (inRec.EventType)
 		{
 		case MOUSE_EVENT: {
-			//Открытие ячейки
+			// открытие ячейки
 			if (inRec.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
 			{
 				x = inRec.Event.MouseEvent.dwMousePosition.X;
 				y = inRec.Event.MouseEvent.dwMousePosition.Y;
-				openSpace(field, playerView, fieldHeight, fieldWidth, x, y);
+				if (x <= 3 || y <= 0)
+					continue;
+				else
+					openSpace(field, playerView, fieldHeight, fieldWidth, x, y);
 			}
-			//Установка флажка
+			// установка флажка
 			if (inRec.Event.MouseEvent.dwButtonState == RIGHTMOST_BUTTON_PRESSED)
 			{
 				x = inRec.Event.MouseEvent.dwMousePosition.X;
 				y = inRec.Event.MouseEvent.dwMousePosition.Y;
-				xDiv2 = x / 2;
-
-				if (y < fieldHeight && xDiv2 < fieldWidth && !(x % 2))
+				if (x <= 3 || y <= 0)
+					continue;
+				else
 				{
-					if (playerView[y][xDiv2] == closedCell)
-						flag = 1;
+					xDiv2 = x / 2 - 2;
 
-					if (playerView[y][xDiv2] == flagMine)
-						flag = 2;
-
-					if (flag == 1)
+					if (y - 1 < fieldHeight && xDiv2 < fieldWidth && !(x % 2))
 					{
-						playerView[y][xDiv2] = flagMine;
-						mines--;
-					}
+						if (playerView[y - 1][xDiv2] == closedCell)
+							flag = 1;
+						if (playerView[y - 1][xDiv2] == flagMine)
+							flag = 2;
+						if (flag == 1)
+						{
+							playerView[y - 1][xDiv2] = flagMine;
+							mines--;
+						}
+						if (flag == 2)
+						{
+							playerView[y - 1][xDiv2] = closedCell;
+							mines++;
+						}
 
-					if (flag == 2)
-					{
-						playerView[y][xDiv2] = closedCell;
-						mines++;
+						flag = 0;
 					}
-
-					flag = 0;
 				}
+				break;
 			}
-
-			break;
 		}
 		case KEY_EVENT: {
 			if (inRec.Event.KeyEvent.uChar.AsciiChar == '0')
-				gameOver = true;
+				isGameOver = true;
 		}
 		}
 	}
-	//Конец игры
-	if (gameOver)
+	// конец игры
+	if (isGameOver)
 	{
 		clock_t endTime = clock();
 
 		system("cls");
 		SetConsoleCursorPosition(hOut, zero);
-
+		// вывод открытого игрового поля
 		for (int i = 0; i < fieldHeight; i++)
 		{
 			playerView[i] = new char[fieldWidth];
@@ -600,9 +738,20 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 			for (int j = 0; j < fieldWidth; j++)
 				playerView[i][j] = openedCell;
 		}
-		//Вывод открытого поля
+		if (fieldWidth * 2 + 7 < 29)
+		{
+			for (int i = 0; i < 29; i++)
+				cout << "#";
+		}
+		else
+		{
+			for (int i = 0; i < fieldWidth * 2 + 7; i++)
+				cout << "#";
+		}
+		cout << endl;
 		for (int i = 0; i < fieldHeight; i++)
 		{
+			cout << "### ";
 			for (int j = 0; j < fieldWidth; j++)
 			{
 				switch (playerView[i][j])
@@ -675,170 +824,223 @@ void gameplay(char** field, int fieldHeight, int fieldWidth, int mines, string s
 				}
 				}
 			}
+
+			if (fieldWidth * 2 + 7 < 29)
+			{
+				for (int i = 0; i < 29 / 2 - fieldWidth * 2 + 8; i++)
+					cout << " ";
+			}
+			cout << "###";
 			cout << endl;
 		}
-
-		if (!win)
+		if (fieldWidth * 2 + 7 < 29)
 		{
-			SetConsoleTextAttribute(hOut, (WORD)(0 | 4));
-			cout << "\nПОРАЖЕНИЕ\n";
+			for (int i = 0; i < 29; i++)
+				cout << "#";
 		}
-
-		if (win)
+		else
 		{
-			SetConsoleTextAttribute(hOut, (WORD)(0 | 10));
-			cout << "\n!ПОБЕДА!\n";
-
+			for (int i = 0; i < fieldWidth * 2 + 7; i++)
+				cout << "#";
+		}
+		cout << endl << endl;
+		// при победе
+		if (isWin)
+		{
 			int time = (int)(endTime - startTime) / CLOCKS_PER_SEC;
 			int minutes = 0;
 			int seconds = 0;
-			int option;
+			char option;
 
-			minutes = time / 60;
-			seconds = time % 60;
-
-			SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
-			cout << "\nВаше время - ";
-			if (minutes < 10)
-				cout << " 0" << minutes << " минут ";
-			else
-				cout << " " << minutes << " минут ";
-			if (seconds < 10)
-				cout << " 0" << seconds << " секунд\n";
-			else
-				cout << " " << seconds << " секунд\n";
-
-			cout << "\nЖелаете сохранить свой результат?\n";
-			cout << "\n1. Сохранить";
-			cout << "\n0. Выход в главное меню\n>";
-			cin >> option;
-
-			switch (option)
+			do
 			{
-			case 1:
-				recordInResultsList(minutes, seconds, selectedPreset);
-				break;
+				minutes = time / 60;
+				seconds = time % 60;
 
-			case 0:
-				callGameMenu();
-				break;
-			}
+				cout << "#########################################" << endl;
+				SetConsoleTextAttribute(hOut, (WORD)(0 | 10));
+				cout << "###             !ПОБЕДА!              ###" << endl;
+				SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
+				cout << "#########################################" << endl;
+				cout << "###  Ваше время -";
+				if (minutes < 10)
+					cout << " 0" << minutes << " минут";
+				else
+					cout << " " << minutes << " минут";
+				if (seconds < 10)
+					cout << " 0" << seconds << " секунд  ###" << endl;
+				else
+					cout << " " << seconds << " секунд  ###" << endl;
+				cout << "#########################################" << endl;
+				cout << "### Желаете сохранить свой результат? ###" << endl;
+				cout << "#########################################" << endl;
+				cout << "###     1 - Сохранить результат       ###" << endl;
+				cout << "###     0 - Выход в главное меню      ###" << endl;
+				cout << "#########################################" << endl;
+				cout << "> ";
+				cin >> option;
+
+				switch (option)
+				{
+				case '1':
+					recordInResultsList(minutes, seconds, selectedPreset);
+					break;
+				case '0':
+					callGameMenu();
+					break;
+				default:
+					callGameMenu();
+					break;
+				}
+			} while (option != '0');
 		}
+		// при поражении
+		else
+		{
+			cout << "#########################################" << endl;
+			SetConsoleTextAttribute(hOut, (WORD)(0 | 4));
+			cout << "###             ПОРАЖЕНИЕ             ###" << endl;
+			SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
+			cout << "#########################################" << endl;
+			cout << "### Нажмите любую  клавишу для выхода ###" << endl;
+			cout << "#########################################" << endl;
 
-		SetConsoleTextAttribute(hOut, (WORD)(0 | 15));
-		cout << "\nНажмите любую клавишу для выхода";
+			do {
+				ReadConsoleInput(hIn, &inRec, 1, &numRead);
+			} while (inRec.EventType != KEY_EVENT);
 
-		do {
-			ReadConsoleInput(hIn, &inRec, 1, &numRead);
-		} while (inRec.EventType != KEY_EVENT);
+			callGameMenu();
+		}
 	}
-
-	system("cls");
 }
 
 void selectPreset()
 {
-	int option, fieldHeight, fieldWidth, mines, minesCheck;
+	int fieldHeight, fieldWidth, minesCheck;
+	int mines = 0;
+	char option;
 	char** field = new char*;
 	boolean fieldWasGenerated = false;
 	string selectedPreset;
 
 	system("cls");
-	cout << "Выберите режим игры:\n\n";
-	cout << "1. Легкий - поле 8x8, 12 мин\n";
-	cout << "2. Средний - поле 11x11, 24 мины\n";
-	cout << "3. Сложный - поле 16x16, 50 мин\n";
-	cout << "4. Настраиваемый\n";
-	cout << "0. Вернуться в главное меню\n> ";
-	cin >> option;
-
-	switch (option)
+	do
 	{
-	case 1: {
-		fieldHeight = fieldWidth = 8;
-		mines = 12;
-		field = generateField(field, fieldHeight, fieldWidth, mines);
-		fieldWasGenerated = true;
-		selectedPreset = "Easy_8x8_12";
-		break;
-	}
-	case 2: {
-		fieldHeight = fieldWidth = 11;
-		mines = 24;
-		field = generateField(field, fieldHeight, fieldWidth, mines);
-		fieldWasGenerated = true;
-		selectedPreset = "Normal_11x11_24";
-		break;
-	}
-	case 3: {
-		fieldHeight = fieldWidth = 16;
-		mines = 50;
-		field = generateField(field, fieldHeight, fieldWidth, mines);
-		fieldWasGenerated = true;
-		selectedPreset = "Hard_16x16_50";
-		break;
-	}
-	case 4: {
-		system("cls");
-		cout << "Настройка режима:\n\n";
-		cout << "Введите высоту поля (max 30, min 3): ";
-		cin >> fieldHeight;
+		cout << "#################################################" << endl;
+		cout << "###            Выберите режим игры            ###" << endl;
+		cout << "#################################################" << endl;
+		cout << "###     1 - Легкий - поле 8x8, 12 мин         ###" << endl;
+		cout << "###     2 - Средний - поле 11x11, 24 мины     ###" << endl;
+		cout << "###     3 - Сложный - поле 16x16, 50 мин      ###" << endl;
+		cout << "###     4 - Настраиваемый                     ###" << endl;
+		cout << "###     0 - Вернуться в главное меню          ###" << endl;
+		cout << "#################################################" << endl;
+		cout << "> ";
+		cin >> option;
 
-		if (fieldHeight > 30)
+		switch (option)
 		{
-			cout << "Будет применена высота поля 30\n";
-			fieldHeight = 30;
+		case '1': {
+			fieldHeight = fieldWidth = 8;
+			mines = 12;
+			field = generateField(field, fieldHeight, fieldWidth, mines);
+			fieldWasGenerated = true;
+			selectedPreset = "Easy_8x8_12";
+			break;
+		}
+		case '2': {
+			fieldHeight = fieldWidth = 11;
+			mines = 24;
+			field = generateField(field, fieldHeight, fieldWidth, mines);
+			fieldWasGenerated = true;
+			selectedPreset = "Normal_11x11_24";
+			break;
+		}
+		case '3': {
+			fieldHeight = fieldWidth = 16;
+			mines = 50;
+			field = generateField(field, fieldHeight, fieldWidth, mines);
+			fieldWasGenerated = true;
+			selectedPreset = "Hard_16x16_50";
+			break;
+		}
+		case '4': {
+			system("cls");
+			cout << "#################################################" << endl;
+			cout << "###           Настройка режима игры           ###" << endl;
+			cout << "#################################################" << endl;
+			cout << "### Введите высоту поля (max 30, min 5): ";
+			cin >> fieldHeight;
+
+			if (fieldHeight > 30)
+			{
+				cout << "###                                           ###" << endl;
+				cout << "###      Будет применена  высота поля 30      ###" << endl;
+				fieldHeight = 30;
+			}
+			if (fieldHeight < 5)
+			{
+				cout << "###                                           ###" << endl;
+				cout << "###      Будет применена  высота поля 5       ###" << endl;
+				fieldHeight = 5;
+			}
+
+			cout << "###                                           ###" << endl;
+			cout << "### Введите ширину поля (max 30, min 5): ";
+			cin >> fieldWidth;
+
+			if (fieldWidth > 30)
+			{
+				cout << "###                                           ###" << endl;
+				cout << "###      Будет применена  ширина поля 30      ###" << endl;
+				fieldWidth = 30;
+			}
+			if (fieldWidth < 5)
+			{
+				cout << "###                                           ###" << endl;
+				cout << "###      Будет применена  ширина поля 5       ###" << endl;
+				fieldWidth = 5;
+			}
+
+			minesCheck = fieldHeight * fieldWidth / 5;
+			cout << "###                                           ###" << endl;
+			cout << "### Введите количество мин (max " << minesCheck << ", min 1): ";
+			cin >> mines;
+
+			if (mines > minesCheck)
+			{
+				cout << "###                                           ###" << endl;
+				cout << "###    Будет применено количество мин " << minesCheck << "     ###" << endl;
+				mines = minesCheck;
+			}
+			if (mines <= 0)
+			{
+				cout << "###                                           ###" << endl;
+				cout << "###     Будет применено  количество мин 1     ###" << endl;
+				mines = 1;
+			}
+
+			field = generateField(field, fieldHeight, fieldWidth, mines);
+			fieldWasGenerated = true;
+			selectedPreset = "Custom_";
+			selectedPreset += to_string(fieldWidth) + "x" + to_string(fieldHeight) + "_" + to_string(mines);
+			break;
+		}
+		case '0': {
+			callGameMenu();
+			break;
+		}
+		default:
+			callGameMenu();
+			break;
 		}
 
-		if (fieldHeight < 3)
+		if (fieldWasGenerated == true)
 		{
-			cout << "Будет применена высота поля 3\n";
-			fieldHeight = 3;
+			gameplay(field, fieldHeight, fieldWidth, mines, selectedPreset);
+			break;
 		}
-
-		cout << "\nВведите ширину поля (max 30, min 3): ";
-		cin >> fieldWidth;
-
-		if (fieldWidth > 30)
-		{
-			cout << "Будет применена ширина поля 30\n";
-			fieldWidth = 30;
-		}
-
-		if (fieldWidth < 3)
-		{
-			cout << "Будет применена ширина поля 3\n";
-			fieldWidth = 3;
-		}
-
-		minesCheck = fieldHeight * fieldWidth / 5;
-
-		cout << "\nВведите количество мин (max " << minesCheck << "): ";
-		cin >> mines;
-
-		if (mines > minesCheck)
-		{
-			cout << "Будет применено количество мин " << minesCheck << endl;
-			mines = minesCheck;
-		}
-
-		field = generateField(field, fieldHeight, fieldWidth, mines);
-		fieldWasGenerated = true;
-		selectedPreset = "Custom_";
-		selectedPreset += to_string(fieldWidth) + "x" + to_string(fieldHeight) + "_" + to_string(mines);
-		break;
-	}
-	case 0: {
-		callGameMenu();
-	}
-	default:
-		callGameMenu();
-	}
-
-	if (fieldWasGenerated = true)
-		gameplay(field, fieldHeight, fieldWidth, mines, selectedPreset);
-	else
-		selectPreset();
+	} while (option != '0');
 }
 
 int main()
@@ -847,6 +1049,5 @@ int main()
 	srand(time(NULL));
 
 	callGameMenu();
-
 	return 0;
 }
